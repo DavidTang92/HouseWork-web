@@ -10,6 +10,8 @@ const Chores = (() => {
 
   const FREQ_LABELS = {
     daily: '每天',
+    every2days: '兩天一次',
+    every3days: '三天一次',
     weekly: '每週一次',
   };
 

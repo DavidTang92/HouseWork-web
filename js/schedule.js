@@ -69,6 +69,20 @@ const Schedule = (() => {
     return `${monday.getFullYear()} 年 ${fmt(monday)} - ${fmt(sunday)}`;
   }
 
+  /**
+   * Get which days of the week are active for a given frequency.
+   * Returns array of day indices (0=Mon, 6=Sun).
+   */
+  function getActiveDays(frequency) {
+    switch (frequency) {
+      case 'daily':      return [0, 1, 2, 3, 4, 5, 6];
+      case 'every2days':  return [0, 2, 4, 6];        // 一、三、五、日
+      case 'every3days':  return [0, 3, 6];            // 一、四、日
+      case 'weekly':      return [0];                  // 一
+      default:            return [0, 1, 2, 3, 4, 5, 6];
+    }
+  }
+
   function render() {
     const members = Store.getMembers();
     const chores = Store.getChores();
@@ -93,15 +107,16 @@ const Schedule = (() => {
 
     const rows = chores.map(chore => {
       const choreData = weekData[chore.id] || {};
+      const activeDays = getActiveDays(chore.frequency);
       const cells = [];
 
       for (let day = 0; day < 7; day++) {
         const memberId = choreData[day];
         const member = memberId ? memberMap[memberId] : null;
 
-        if (chore.frequency === 'weekly' && day > 0) {
-          // Weekly chores only show on Monday (day 0), merge remaining
-          cells.push(`<td></td>`);
+        if (!activeDays.includes(day)) {
+          // This day is not active for this frequency
+          cells.push(`<td class="cell-inactive"></td>`);
         } else {
           const label = member ? escapeHtml(member.name) : '';
           const bgStyle = member ? `background:${member.color};` : '';
@@ -136,7 +151,7 @@ const Schedule = (() => {
     const chore = chores.find(c => c.id === choreId);
     const weekKey = getWeekKey(currentWeekOffset);
 
-    const dayLabel = chore.frequency === 'weekly' ? '本週' : `週${DAY_NAMES[dayIndex]}`;
+    const dayLabel = `週${DAY_NAMES[dayIndex]}`;
     modalTitle().textContent = `${chore.name} - ${dayLabel}`;
 
     modalMembers().innerHTML = members.map(m => `
@@ -188,19 +203,12 @@ const Schedule = (() => {
 
     chores.forEach(chore => {
       weekData[chore.id] = {};
+      const activeDays = getActiveDays(chore.frequency);
 
-      if (chore.frequency === 'weekly') {
-        // Assign to the member with fewest assignments
+      for (const day of activeDays) {
         const chosen = pickLeastAssigned(members, assignCount);
-        weekData[chore.id][0] = chosen.id;
+        weekData[chore.id][day] = chosen.id;
         assignCount[chosen.id]++;
-      } else {
-        // Daily: rotate through members
-        for (let day = 0; day < 7; day++) {
-          const chosen = pickLeastAssigned(members, assignCount);
-          weekData[chore.id][day] = chosen.id;
-          assignCount[chosen.id]++;
-        }
       }
     });
 

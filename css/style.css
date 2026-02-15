@@ -361,6 +361,10 @@ body {
   border-color: transparent;
 }
 
+.cell-inactive {
+  background: #f3f4f6;
+}
+
 /* === Empty State === */
 .empty-state {
   text-align: center;
