@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>家事排班表</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+    <header class="header">
+      <h1>家事排班表</h1>
+      <p class="subtitle">輕鬆管理家庭分工</p>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="schedule">排班表</button>
+      <button class="tab" data-tab="members">家庭成員</button>
+      <button class="tab" data-tab="chores">家事項目</button>
+    </nav>
+
+    <main class="content">
+      <!-- Schedule Tab -->
+      <section id="tab-schedule" class="tab-content active">
+        <div class="schedule-header">
+          <button id="prev-week" class="btn btn-icon" title="上一週">&larr;</button>
+          <h2 id="week-label"></h2>
+          <button id="next-week" class="btn btn-icon" title="下一週">&rarr;</button>
+        </div>
+        <div class="schedule-actions">
+          <button id="auto-assign" class="btn btn-primary">自動排班</button>
+          <button id="clear-week" class="btn btn-danger">清除本週</button>
+        </div>
+        <div class="schedule-table-wrapper">
+          <table id="schedule-table" class="schedule-table">
+            <thead>
+              <tr>
+                <th>家事</th>
+                <th>一</th>
+                <th>二</th>
+                <th>三</th>
+                <th>四</th>
+                <th>五</th>
+                <th>六</th>
+                <th>日</th>
+              </tr>
+            </thead>
+            <tbody id="schedule-body"></tbody>
+          </table>
+        </div>
+        <div id="schedule-empty" class="empty-state" style="display:none;">
+          <p>尚未設定家事或成員</p>
+          <p>請先到「家庭成員」和「家事項目」新增資料</p>
+        </div>
+      </section>
+
+      <!-- Members Tab -->
+      <section id="tab-members" class="tab-content">
+        <div class="section-header">
+          <h2>家庭成員</h2>
+        </div>
+        <form id="member-form" class="add-form">
+          <input type="text" id="member-name" placeholder="輸入成員名稱" required maxlength="20">
+          <input type="color" id="member-color" value="#4A90D9" title="選擇顏色">
+          <button type="submit" class="btn btn-primary">新增</button>
+        </form>
+        <ul id="member-list" class="item-list"></ul>
+        <div id="member-empty" class="empty-state" style="display:none;">
+          <p>尚未新增任何成員</p>
+        </div>
+      </section>
+
+      <!-- Chores Tab -->
+      <section id="tab-chores" class="tab-content">
+        <div class="section-header">
+          <h2>家事項目</h2>
+        </div>
+        <form id="chore-form" class="add-form">
+          <input type="text" id="chore-name" placeholder="輸入家事名稱" required maxlength="30">
+          <select id="chore-frequency">
+            <option value="daily">每天</option>
+            <option value="weekly">每週一次</option>
+          </select>
+          <button type="submit" class="btn btn-primary">新增</button>
+        </form>
+        <ul id="chore-list" class="item-list"></ul>
+        <div id="chore-empty" class="empty-state" style="display:none;">
+          <p>尚未新增任何家事</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Assignment Modal -->
+  <div id="assign-modal" class="modal" style="display:none;">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <h3 id="modal-title">指派成員</h3>
+      <div id="modal-members" class="modal-members"></div>
+      <div class="modal-actions">
+        <button id="modal-clear" class="btn btn-danger">取消指派</button>
+        <button id="modal-close" class="btn">關閉</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/store.js"></script>
+  <script src="js/members.js"></script>
+  <script src="js/chores.js"></script>
+  <script src="js/schedule.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

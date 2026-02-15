@@ -1,0 +1,482 @@
+/* === Reset & Base === */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --primary: #4A90D9;
+  --primary-hover: #357ABD;
+  --danger: #E74C3C;
+  --danger-hover: #C0392B;
+  --bg: #F5F7FA;
+  --surface: #FFFFFF;
+  --text: #2C3E50;
+  --text-light: #7F8C8D;
+  --border: #E1E8ED;
+  --radius: 8px;
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* === Layout === */
+#app {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+/* === Header === */
+.header {
+  text-align: center;
+  padding: 24px 0 16px;
+}
+
+.header h1 {
+  font-size: 1.8rem;
+  color: var(--primary);
+}
+
+.subtitle {
+  color: var(--text-light);
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+/* === Tabs === */
+.tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 4px;
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+}
+
+.tab {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-light);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.tab:hover {
+  color: var(--text);
+  background: var(--bg);
+}
+
+.tab.active {
+  background: var(--primary);
+  color: white;
+}
+
+/* === Tab Content === */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* === Buttons === */
+.btn {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  background: var(--bg);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: white;
+  border-color: var(--danger);
+}
+
+.btn-danger:hover {
+  background: var(--danger-hover);
+  border-color: var(--danger-hover);
+}
+
+.btn-icon {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  border-radius: 50%;
+}
+
+.btn-sm {
+  padding: 4px 10px;
+  font-size: 0.8rem;
+}
+
+/* === Forms === */
+.add-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.add-form input[type="text"] {
+  flex: 1;
+  min-width: 150px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.add-form input[type="text"]:focus {
+  border-color: var(--primary);
+}
+
+.add-form input[type="color"] {
+  width: 40px;
+  height: 38px;
+  padding: 2px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  background: var(--surface);
+}
+
+.add-form select {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  outline: none;
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.add-form select:focus {
+  border-color: var(--primary);
+}
+
+/* === Item List === */
+.item-list {
+  list-style: none;
+}
+
+.item-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 8px;
+  transition: transform 0.15s;
+}
+
+.item-list li:hover {
+  transform: translateY(-1px);
+}
+
+.item-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.item-name {
+  flex: 1;
+  font-weight: 500;
+}
+
+.item-badge {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  background: var(--bg);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.item-delete {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.item-delete:hover {
+  color: var(--danger);
+  background: #fde8e8;
+}
+
+/* === Section Header === */
+.section-header {
+  margin-bottom: 16px;
+}
+
+.section-header h2 {
+  font-size: 1.2rem;
+}
+
+/* === Schedule === */
+.schedule-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.schedule-header h2 {
+  font-size: 1.1rem;
+  min-width: 200px;
+  text-align: center;
+}
+
+.schedule-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  justify-content: center;
+}
+
+.schedule-table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  min-width: 600px;
+}
+
+.schedule-table th {
+  background: var(--primary);
+  color: white;
+  padding: 10px 8px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.schedule-table th:first-child {
+  text-align: left;
+  padding-left: 14px;
+  min-width: 100px;
+}
+
+.schedule-table td {
+  padding: 6px;
+  border: 1px solid var(--border);
+  text-align: center;
+  vertical-align: middle;
+  height: 48px;
+}
+
+.schedule-table td:first-child {
+  text-align: left;
+  padding-left: 14px;
+  font-weight: 500;
+  background: #f9fafb;
+}
+
+.schedule-table tbody tr:hover td {
+  background: #f0f5ff;
+}
+
+.schedule-table tbody tr:hover td:first-child {
+  background: #e8eef5;
+}
+
+/* === Schedule Cell === */
+.cell-btn {
+  width: 100%;
+  height: 100%;
+  min-height: 36px;
+  border: 2px dashed transparent;
+  background: transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.15s;
+  padding: 4px 6px;
+}
+
+.cell-btn:hover {
+  border-color: var(--primary);
+  background: rgba(74, 144, 217, 0.05);
+}
+
+.cell-btn.assigned {
+  border-style: solid;
+  color: white;
+  border-color: transparent;
+}
+
+/* === Empty State === */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-light);
+}
+
+.empty-state p:first-child {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+/* === Modal === */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  position: relative;
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 24px;
+  width: 90%;
+  max-width: 360px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.modal-content h3 {
+  margin-bottom: 16px;
+  font-size: 1.1rem;
+}
+
+.modal-members {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.modal-member-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 2px solid var(--border);
+  background: var(--surface);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.15s;
+}
+
+.modal-member-btn:hover {
+  border-color: var(--primary);
+  background: rgba(74, 144, 217, 0.05);
+}
+
+.modal-member-btn .dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+/* === Responsive === */
+@media (max-width: 600px) {
+  #app {
+    padding: 10px;
+  }
+
+  .header h1 {
+    font-size: 1.4rem;
+  }
+
+  .tab {
+    padding: 8px 10px;
+    font-size: 0.85rem;
+  }
+
+  .schedule-header h2 {
+    font-size: 0.95rem;
+    min-width: 160px;
+  }
+
+  .add-form {
+    flex-direction: column;
+  }
+
+  .add-form input[type="color"] {
+    width: 100%;
+  }
+
+  .schedule-actions {
+    flex-direction: column;
+  }
+
+  .schedule-actions .btn {
+    width: 100%;
+  }
+}
